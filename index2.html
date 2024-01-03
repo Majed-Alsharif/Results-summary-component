@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="fontawesome-free-6.4.2-web/css/all.min.css" />
+    <!-- <script type="text/javascript" src="data.json"></script> -->
+  </head>
+  <input type="file" id="fileInput" />
+  <script>
+    var fileInput = document.getElementById("fileInput");
+    var reader = new FileReader();
+
+    fileInput.addEventListener("change", function (event) {
+      var file = event.target.files[0];
+      reader.readAsText(file);
+    });
+
+    reader.onload = function (event) {
+      var data = JSON.parse(event.target.result);
+      console.log(data[0].category);
+      console.log(data[0].score);
+      // console.log(data[0].icon);
+      document.getElementById("reaction21").innerText = data[0].category;
+      document.getElementById("80").innerText = data[0].score;
+      document.getElementById("reaction22").innerText = data[1].category;
+      document.getElementById("92").innerText = data[0].score;
+
+      document.getElementById("reaction23").innerText = data[2].category;
+      document.getElementById("61").innerText = data[0].score;
+
+      document.getElementById("reaction24").innerText = data[3].category;
+      document.getElementById("72").innerText = data[0].score;
+    };
+
+    reader.onerror = function (event) {
+      console.error("Error reading file:", event.target.error);
+    };
+  </script>
+
+  <style>
+    * {
+      margin: 0;
+    }
+    .page {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100vw;
+      height: 100vh;
+    }
+    .container {
+      width: 375px;
+      height: 100vh;
+      display: grid;
+      grid-template-rows: repeat(2, 1fr);
+    }
+    .left {
+      /* overflow: hidden; */
+      display: flex;
+      justify-content: center;
+      height: 45vh;
+      padding: 25px;
+      display: grid;
+      max-width: 454px;
+
+      background-image: linear-gradient(
+        hsl(252, 100%, 67%),
+        hsl(241, 81%, 54%)
+      );
+      border-radius: 20px;
+      box-shadow: 0 0 20px 0px hsl(252, 100%, 67%);
+    }
+
+    .circle {
+      justify-self: center;
+      width: 25vh;
+      height: 25vh;
+      border-radius: 50%;
+      background-image: linear-gradient(
+        hsla(256, 72%, 46%, 1),
+        hsla(241, 72%, 46%, 0)
+      );
+      text-align: center;
+    }
+
+    .right {
+      height: 45vh;
+      padding: 20px;
+      display: grid;
+      grid-row: 2/3;
+      border-radius: 20px;
+      box-shadow: 0 0 20px 0px hsl(252, 100%, 67%);
+    }
+    .right div {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 5px;
+      padding: 10px;
+      border-radius: 10px;
+    }
+    .reaction {
+      background-color: hsl(0, 100%, 67%, 0.185);
+    }
+
+    .memory {
+      background-color: hsla(39, 100%, 56%, 0.185);
+    }
+    .verbal {
+      background-color: hsl(166, 100%, 37%, 0.185);
+    }
+    .visual {
+      background-color: hsl(234, 85%, 45%, 0.185);
+    }
+
+    input {
+      border: 0;
+      background-color: hsl(224, 30%, 27%);
+      border-radius: 20px;
+      width: 375px;
+      height: 50px;
+      color: white;
+    }
+    input:hover {
+      cursor: pointer;
+      background-image: linear-gradient(
+        hsl(252, 100%, 67%),
+        hsl(241, 81%, 54%)
+      );
+    }
+    @media only screen and (min-width: 375px) {
+      .page {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .container {
+        width: 1440px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        grid-template-rows: 1fr;
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .left {
+        grid-column: 1/2;
+        grid-row: 1/2;
+
+        width: 40vw;
+      }
+      .right {
+        grid-column: 2/3;
+        grid-row: 1/2;
+      }
+      p {
+        max-width: 30vw;
+      }
+    }
+  </style>
+  <body>
+    <div class="page">
+      <div class="container">
+        <div class="left">
+          <h3 style="text-align: center; color: hsl(241, 100%, 89%)">
+            Your Result
+          </h3>
+          <div class="circle">
+            <p
+              style="
+                margin-top: 50px;
+                font-weight: 800;
+                font-size: 80px;
+                color: white;
+              "
+            >
+              76
+            </p>
+            <h6
+              style="
+                margin-bottom: 20px;
+                font-size: 20px;
+                color: hsl(241, 100%, 89%);
+              "
+            >
+              of 100
+            </h6>
+          </div>
+          <div class="paragraph">
+            <h4 style="text-align: center; color: white; font-size: 30px">
+              Great
+            </h4>
+            <p style="color: hsl(241, 100%, 89%)">
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vel,
+              dignissimos dolore dolorem provident
+            </p>
+          </div>
+        </div>
+        <div class="right">
+          <h3
+            style="
+              text-align: start;
+              margin: 10px 0 0 0;
+              color: hsl(224, 30%, 27%);
+            "
+          >
+            Summary
+          </h3>
+          <div class="reaction">
+            <i id="icon"
+              style="color: hsla(0, 100%, 67%, 0.498)"
+              class="fa-solid fa-bolt"
+            >
+              <span id="reaction21">reaction</span>
+            </i>
+            <h3 id="80">
+              80
+            </h3>
+            <span style="color: hsl(242, 14%, 55%) "> <h3>/100 </h3> </span>
+          </div>
+          <div class="memory">
+            <i class="fa-solid fa-brain" style="color: #d2d530"
+              ><span id="reaction22">reaction</span>
+            </i>
+            <h3 id="92">
+              92
+            </h3>
+            <span style="color: hsl(242, 14%, 55%) "> <h3>/100 </h3> </span>
+          </div>
+          <div class="verbal">
+            <i style="color: hsla(0, 100%, 67%, 0.498)" class="fa-solid fa-bolt"
+              ><span id="reaction23">reaction</span>
+            </i>
+            <h3 id="63" >
+              61
+            </h3>
+            <span style="color: hsl(242, 14%, 55%) "> <h3>/100 </h3> </span>
+          </div>
+          <div class="visual">
+            <i style="color: hsla(0, 100%, 67%, 0.498)" class="fa-solid fa-bolt"
+              ><span id="reaction24">reaction</span>
+            </i>
+            <h3 id="72" >
+              72
+            </h3>
+            <span style="color: hsl(242, 14%, 55%) "> <h3>/100 </h3> </span>
+          </div>
+          <div>
+            <input type="button" value="Continue" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
